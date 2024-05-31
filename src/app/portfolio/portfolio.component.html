@@ -1,0 +1,65 @@
+<article class="portfolio" data-page="portfolio">
+
+  <header>
+    <h2 class="h2 article-title">Portfolio</h2>
+  </header>
+
+  <section class="projects">
+
+    <ul class="filter-list">
+
+      @for(category of categories; track $index){
+      <li class="filter-item">
+        <button [class.active]="category.toLowerCase() == filter" (click)="filterFunc($event)">{{category}}</button>
+      </li>
+      }
+    </ul>
+
+    <div class="filter-select-box">
+
+      <button class="filter-select" [class.active]="isFilterActive" (click)="toggleClass()">
+
+        <div class="select-value" data-select-value>{{selectedCategory}}</div>
+
+        <div class="select-icon">
+          <ion-icon name="chevron-down"></ion-icon>
+        </div>
+
+      </button>
+
+      <ul class="select-list">
+        @for(category of categories; track $index){
+        <li class="select-item">
+          <button (click)="setSelected($event)">{{category}}</button>
+        </li>
+        }
+      </ul>
+
+    </div>
+
+    <ul class="project-list">
+      @for(project of filteredProjects; track $index){
+      <li class="project-item active">
+        <a href="/portfolio">
+
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+
+            <img [src]="project.image" [alt]="project.alt" loading="lazy">
+          </figure>
+
+          <h3 class="project-title">{{project.title}}</h3>
+
+          <p class="project-category">{{project.category}}</p>
+
+        </a>
+      </li>
+      }
+
+    </ul>
+
+  </section>
+
+</article>
